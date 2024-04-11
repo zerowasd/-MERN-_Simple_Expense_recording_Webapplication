@@ -13,7 +13,9 @@
   "author": "Neeraj",
   "license": "DYPIU",
   "dependencies": {
-    //install nodemon globally
+
+
+    
     "colors": "^1.4.0",
     "concurrently": "^7.5.0",
     "cors": "^2.8.5",
