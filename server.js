@@ -23,8 +23,11 @@ app.use(cors());
   //    res.send("<h1>Hello:Server</h1>")
   // })
 
-//routes (user.client.route)
+//routes (user.client.route) || userroutes
 app.use('/api/v1/user', require('./routes/userRoute'))
+
+//transaction routes
+app.use('/api/v1/transactions', require('./routes/transactionRoutes'))
 
 //port
 const PORT = 8080 || process.env.PORT;
