@@ -1,20 +1,27 @@
 const mongoose = require('mongoose')
 
 const transactionSchema = new mongoose.Schema({
+    userid: {
+        type: String,
+        requires: true,
+    },
     amount: {
         type: Number,
         required: [true, 'amount is required']
+    },
+    type: {
+        type: String,
+        requires: [true, 'type is required']
     },
     category: {
         type: String,
         requires: [true, 'category is required']
     },
-    refrence: {
+    reference: {
         type: String,
     },
     description: {
         type: String,
-        required: [true, 'description is required']
     },
     date: {
         type: String,
@@ -23,3 +30,4 @@ const transactionSchema = new mongoose.Schema({
 }, { timestamps: true })
 
 const transactionModel = mongoose.model('transactions', transactionSchema)
+module.exports = transactionModel;
