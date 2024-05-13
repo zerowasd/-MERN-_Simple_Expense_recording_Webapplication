@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const transactionSchema = new mongoose.Schema({
     amount: {
-        type: String,
+        type: Number,
         required: [true, 'amount is required']
     },
     category: {
