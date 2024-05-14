@@ -40,3 +40,22 @@
   padding: 15px 20px;
   box-shadow: 0 0 3px gray;
 }
+
+/* antd icons */
+.anticon svg{
+  font-size: 20px;
+  cursor: pointer;
+}
+.active-icon{
+  color: red;
+
+}
+.inactive-icon{
+  color: gray;
+}
+
+.switch-icons{
+  border: 1px solid rgba(0, 0, 0, 0.677);
+  border-radius: 5px;
+  padding: 10px;
+}
