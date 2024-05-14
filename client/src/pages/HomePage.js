@@ -3,6 +3,7 @@ import {Modal,Form,Input,Select,message,Table,DatePicker} from 'antd';
 import Layout from '../components/Layout/Layout';
 import axios from 'axios';
 import Spinner from './../components/Spinner';
+import moment from "moment";
 const { RangePicker } = DatePicker;
 
 /* eslint-disable react/no-array-index-key */
@@ -13,12 +14,14 @@ const HomePage = () => {
   const [allTransaction, setAllTransaction] = useState([])
   const [frequency,setFrequency] = useState('7')
   const [selectedDate, setSelectedDate] = useState([])
+  const [type,setType] = useState('all')
   //table data
   
   const columns = [
     {
       title:'Date',
-      dataIndex:'date'
+      dataIndex:'date',
+      render : (text) => <span>{moment(text).format('YYYY-MM-DD')}</span>,
     },
     {
       title:'Amount',
@@ -54,6 +57,7 @@ const HomePage = () => {
         userid: user._id,
         frequency,
         selectedDate,
+        type
       });
       setLoading(false);
       setAllTransaction(res.data);
@@ -64,7 +68,7 @@ const HomePage = () => {
     }
   };
     getAllTransactions();
-  },[frequency, selectedDate])
+  },[frequency, selectedDate,type])
   //form handling
   const handleSubmit = async (values) => {
     try {
@@ -84,7 +88,6 @@ const HomePage = () => {
       {
         loading && <Spinner />
       }
-      <h1>Management-CRUD-div</h1>
       <div className="filter">
         <div>
         <h6>Select frequency</h6>
@@ -93,6 +96,15 @@ const HomePage = () => {
           <Select.Option value="30">Last 1 month</Select.Option>
           <Select.Option value="365">Last 1 year</Select.Option>
           <Select.Option value="custom">custom</Select.Option>
+        </Select>
+        {frequency === 'custom' && <RangePicker value={selectedDate} onChange={(values) => setSelectedDate(values)}/>}
+        </div>
+        <div>
+        <h6>Select Type (Income/Expense)</h6>
+        <Select value={type} onChange={(values) => setType(values)}>
+          <Select.Option value="all">All</Select.Option>
+          <Select.Option value="income">Income</Select.Option>
+          <Select.Option value="expense">Expense</Select.Option>
         </Select>
         {frequency === 'custom' && <RangePicker value={selectedDate} onChange={(values) => setSelectedDate(values)}/>}
         </div>
