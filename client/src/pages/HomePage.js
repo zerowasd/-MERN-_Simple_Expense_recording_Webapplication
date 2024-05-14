@@ -5,6 +5,7 @@ import Layout from "../components/Layout/Layout";
 import axios from "axios";
 import Spinner from "./../components/Spinner";
 import moment from "moment";
+import Analytics from "../components/Analytics";
 const { RangePicker } = DatePicker;
 
 /* eslint-disable react/no-array-index-key */
@@ -140,7 +141,10 @@ const HomePage = () => {
         </div>
       </div>
       <div className="content">
-        <Table columns={columns} dataSource={allTransaction} />
+          {viewData === "table" ? <Table columns={columns} dataSource={allTransaction} /> : 
+          <Analytics allTransaction={allTransaction}/>
+          }
+        
       </div>
       <Modal
         title="Add Transaction"
@@ -168,6 +172,7 @@ const HomePage = () => {
               <Select.Option value="medical">Medical</Select.Option>
               <Select.Option value="fees">Fees</Select.Option>
               <Select.Option value="tax">Tax</Select.Option>
+              <Select.Option value="bill">Bill</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item label="Date" name="date">
