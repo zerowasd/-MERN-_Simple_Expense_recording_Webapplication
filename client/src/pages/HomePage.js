@@ -1,8 +1,9 @@
-import React,{useState, useEffect} from 'react'
-import {Modal,Form,Input,Select,message,Table} from 'antd'
-import Layout from '../components/Layout/Layout'
+import React,{useState, useEffect} from 'react';
+import {Modal,Form,Input,Select,message,Table,DatePicker} from 'antd';
+import Layout from '../components/Layout/Layout';
 import axios from 'axios';
-import Spinner from './../components/Spinner'
+import Spinner from './../components/Spinner';
+const { RangePicker } = DatePicker;
 
 /* eslint-disable react/no-array-index-key */
 
@@ -10,7 +11,8 @@ const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading,setLoading] = useState(false);
   const [allTransaction, setAllTransaction] = useState([])
-
+  const [frequency,setFrequency] = useState('7')
+  const [selectedDate, setSelectedDate] = useState([])
   //table data
   
   const columns = [
@@ -39,13 +41,19 @@ const HomePage = () => {
 
     } 
   ]
+  
+  //use effect hook
   //get all transactions
+  useEffect(() => {
+    
   const getAllTransactions = async () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
       const res = await axios.post("/transactions/get-transaction", {
         userid: user._id,
+        frequency,
+        selectedDate,
       });
       setLoading(false);
       setAllTransaction(res.data);
@@ -54,11 +62,9 @@ const HomePage = () => {
       console.log(error);
       message.error("fetch issue with transaction");
     }
-  }
-  //use effect hook
-  useEffect(() => {
+  };
     getAllTransactions();
-  },[])
+  },[frequency, selectedDate])
   //form handling
   const handleSubmit = async (values) => {
     try {
@@ -80,7 +86,16 @@ const HomePage = () => {
       }
       <h1>Management-CRUD-div</h1>
       <div className="filter">
-        <div>range filters</div>
+        <div>
+        <h6>Select frequency</h6>
+        <Select value={frequency} onChange={(values) => setFrequency(values)}>
+          <Select.Option value="7">Last 1 week</Select.Option>
+          <Select.Option value="30">Last 1 month</Select.Option>
+          <Select.Option value="365">Last 1 year</Select.Option>
+          <Select.Option value="custom">custom</Select.Option>
+        </Select>
+        {frequency === 'custom' && <RangePicker value={selectedDate} onChange={(values) => setSelectedDate(values)}/>}
+        </div>
           <button className="btn btn-primary" onClick={() => setShowModal(true)}>Add New</button>
       </div>
       <div className="content">
