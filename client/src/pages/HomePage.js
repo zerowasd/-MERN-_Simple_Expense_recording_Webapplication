@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Form, Input, Select, message, Table, DatePicker } from "antd";
-import { UnorderedListOutlined, AreaChartOutlined } from "@ant-design/icons";
+import { UnorderedListOutlined, AreaChartOutlined,EditOutlined,DeleteOutlined } from "@ant-design/icons";
 import Layout from "../components/Layout/Layout";
 import axios from "axios";
 import Spinner from "./../components/Spinner";
@@ -18,6 +18,7 @@ const HomePage = () => {
   const [selectedDate, setSelectedDate] = useState([]);
   const [type, setType] = useState("all");
   const [viewData, setViewData] = useState("table");
+  const [editable,setEditable] = useState(null)
   //table data
 
   const columns = [
@@ -44,6 +45,15 @@ const HomePage = () => {
     },
     {
       title: "Actions",
+      render: (text,record) => (
+        <div>
+          <EditOutlined onClick={()=>{
+            setEditable(record);
+            setShowModal(true);
+          }} />
+          <DeleteOutlined className="mx-2"/>
+        </div>
+      )
     },
   ];
 
@@ -82,6 +92,7 @@ const HomePage = () => {
       setLoading(false);
       message.success("Transaction Added");
       setShowModal(false);
+      setEditable(null);
     } catch (error) {
       setLoading(false);
       message.error("failed to add transaction");
@@ -147,12 +158,12 @@ const HomePage = () => {
         
       </div>
       <Modal
-        title="Add Transaction"
+        title= {editable ? 'Edit Transaction' : 'Add Transaction'}
         open={showModal}
         onCancel={() => setShowModal(false)}
         footer={false}
       >
-        <Form layout="vertical" onFinish={handleSubmit}>
+        <Form layout="vertical" onFinish={handleSubmit} initialValues={editable}>
           <Form.Item label="Amount" name="amount">
             <Input type="text" />
           </Form.Item>
@@ -165,14 +176,17 @@ const HomePage = () => {
           <Form.Item label="Category" name="category">
             <Select>
               <Select.Option value="salary">Salary</Select.Option>
-              <Select.Option value="tip">Tip</Select.Option>
-              <Select.Option value="Side Project">Side Project</Select.Option>
+              <Select.Option value="tip">Tiped/Given/Gifted</Select.Option>
+              <Select.Option value="sideproject">Side Project</Select.Option>
+              <Select.Option value="passiveincome">Passive Income</Select.Option>
+              <Select.Option value="Shopping">Shopping</Select.Option>
               <Select.Option value="food">Food</Select.Option>
               <Select.Option value="movie">Movie</Select.Option>
               <Select.Option value="medical">Medical</Select.Option>
               <Select.Option value="fees">Fees</Select.Option>
               <Select.Option value="tax">Tax</Select.Option>
-              <Select.Option value="bill">Bill</Select.Option>
+              <Select.Option value="bill">Bill/Rent</Select.Option>
+              <Select.Option value="investment">Investment/Asset Purchased</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item label="Date" name="date">

@@ -26,6 +26,8 @@ const getAllTransaction = async(req,res) => {
     }
 }
 
+
+
 const addTransaction= async(req,res) => {
     try{
         const newTransaction = new transactionModel(req.body);
