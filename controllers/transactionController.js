@@ -30,7 +30,7 @@ const getAllTransaction = async (req, res) => {
 const editTransaction = async (req, res) => {
   try {
     await transactionModel.findOneAndUpdate(
-      { _id: req.body.transactionID },
+      { _id: req.body.transactionId },
       req.body.payload
     );
     res.status(200).send("Edited Successfully");
