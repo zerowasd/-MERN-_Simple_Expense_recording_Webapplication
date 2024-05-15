@@ -3,6 +3,7 @@ const {
   addTransaction,
   editTransaction,
   getAllTransaction,
+  deleteTransaction,
 } = require("../controllers/transactionController");
 
 //router object
@@ -13,6 +14,8 @@ const router = express.Router();
 router.post("/add-transaction", addTransaction);
 //edit trans
 router.post("/edit-transaction", editTransaction);
+//delete trans
+router.post("/delete-transaction", deleteTransaction);
 
 //get trans
 router.post("/get-transaction", getAllTransaction);
