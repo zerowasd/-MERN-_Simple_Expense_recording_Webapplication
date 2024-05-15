@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Form, Input, Select, message, Table, DatePicker } from "antd";
-import { UnorderedListOutlined, AreaChartOutlined,EditOutlined,DeleteOutlined } from "@ant-design/icons";
+import {
+  UnorderedListOutlined,
+  AreaChartOutlined,
+  EditOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 import Layout from "../components/Layout/Layout";
 import axios from "axios";
 import Spinner from "./../components/Spinner";
@@ -18,7 +23,7 @@ const HomePage = () => {
   const [selectedDate, setSelectedDate] = useState([]);
   const [type, setType] = useState("all");
   const [viewData, setViewData] = useState("table");
-  const [editable,setEditable] = useState(null)
+  const [editable, setEditable] = useState(null);
   //table data
 
   const columns = [
@@ -45,15 +50,17 @@ const HomePage = () => {
     },
     {
       title: "Actions",
-      render: (text,record) => (
+      render: (text, record) => (
         <div>
-          <EditOutlined onClick={()=>{
-            setEditable(record);
-            setShowModal(true);
-          }} />
-          <DeleteOutlined className="mx-2"/>
+          <EditOutlined
+            onClick={() => {
+              setEditable(record);
+              setShowModal(true);
+            }}
+          />
+          <DeleteOutlined className="mx-2" />
         </div>
-      )
+      ),
     },
   ];
 
@@ -85,12 +92,24 @@ const HomePage = () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
-      await axios.post("/transactions/add-transaction", {
-        ...values,
-        userid: user._id,
-      });
-      setLoading(false);
-      message.success("Transaction Added");
+      if (editable) {
+        await axios.post("/transactions/edit-transaction", {
+          payload: {
+            ...values,
+            userId: user._id,
+          },
+          transactionId: editable._id,
+        });
+        setLoading(false);
+        message.success("Transaction Updated Successfully");
+      } else {
+        await axios.post("/transactions/add-transaction", {
+          ...values,
+          userid: user._id,
+        });
+        setLoading(false);
+        message.success("Transaction Added");
+      }
       setShowModal(false);
       setEditable(null);
     } catch (error) {
@@ -134,11 +153,15 @@ const HomePage = () => {
         </div>
         <div className="switch-icons">
           <UnorderedListOutlined
-            className={`mx-2 ${viewData === 'table' ? 'active-icon' : 'inactive-icon'}`}
+            className={`mx-2 ${
+              viewData === "table" ? "active-icon" : "inactive-icon"
+            }`}
             onClick={() => setViewData("table")}
           />
           <AreaChartOutlined
-            className={`mx-2 ${viewData === 'analytics' ? 'active-icon' : 'inactive-icon'}`}
+            className={`mx-2 ${
+              viewData === "analytics" ? "active-icon" : "inactive-icon"
+            }`}
             onClick={() => setViewData("analytics")}
           />
         </div>
@@ -152,18 +175,23 @@ const HomePage = () => {
         </div>
       </div>
       <div className="content">
-          {viewData === "table" ? <Table columns={columns} dataSource={allTransaction} /> : 
-          <Analytics allTransaction={allTransaction}/>
-          }
-        
+        {viewData === "table" ? (
+          <Table columns={columns} dataSource={allTransaction} />
+        ) : (
+          <Analytics allTransaction={allTransaction} />
+        )}
       </div>
       <Modal
-        title= {editable ? 'Edit Transaction' : 'Add Transaction'}
+        title={editable ? "Edit Transaction" : "Add Transaction"}
         open={showModal}
         onCancel={() => setShowModal(false)}
         footer={false}
       >
-        <Form layout="vertical" onFinish={handleSubmit} initialValues={editable}>
+        <Form
+          layout="vertical"
+          onFinish={handleSubmit}
+          initialValues={editable}
+        >
           <Form.Item label="Amount" name="amount">
             <Input type="text" />
           </Form.Item>
@@ -178,7 +206,9 @@ const HomePage = () => {
               <Select.Option value="salary">Salary</Select.Option>
               <Select.Option value="tip">Tiped/Given/Gifted</Select.Option>
               <Select.Option value="sideproject">Side Project</Select.Option>
-              <Select.Option value="passiveincome">Passive Income</Select.Option>
+              <Select.Option value="passiveincome">
+                Passive Income
+              </Select.Option>
               <Select.Option value="Shopping">Shopping</Select.Option>
               <Select.Option value="food">Food</Select.Option>
               <Select.Option value="movie">Movie</Select.Option>
@@ -186,7 +216,9 @@ const HomePage = () => {
               <Select.Option value="fees">Fees</Select.Option>
               <Select.Option value="tax">Tax</Select.Option>
               <Select.Option value="bill">Bill/Rent</Select.Option>
-              <Select.Option value="investment">Investment/Asset Purchased</Select.Option>
+              <Select.Option value="investment">
+                Investment/Asset Purchased
+              </Select.Option>
             </Select>
           </Form.Item>
           <Form.Item label="Date" name="date">
