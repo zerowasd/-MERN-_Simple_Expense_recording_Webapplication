@@ -8,10 +8,10 @@ If you fork this you can run the it locally just make sure that you have Node ve
 
 Add the link to your mongodb database in .env file
 Commands to follow afterwords:
-   make sure you are using npm version 6.14.15 and node version 14.18.0
-   npm i
-   npm run dev
-   wait a while and it should open the local host environment
+   1. make sure you are using npm version 6.14.15 and node version 14.18.0
+   2. npm i
+   3. npm run dev
+   4. wait a while and it should open the local host environment
 
 
 I am documenting everything i learned, if any thing in the redme file does not make sense than don't bother i just wanted to document the problems and issues i encountered due to lack of my knowledge. 
