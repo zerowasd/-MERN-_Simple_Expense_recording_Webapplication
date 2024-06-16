@@ -1,8 +1,34 @@
-<<<<<<< HEAD
 # Expense_Management_System
-A Expense tracker web-app that uses MERN stack.
-=======
-# ET
+A Expense tracker web-app that uses MERN stack. I followed a Hindi youtube tutorial, i will link the playlist here: https://www.youtube.com/playlist?list=PLuHGmgpyHfRw1eJL5-2L0W1XsUVTTCEMh
+
+I could not deploy the project as cyclic was shutdown: https://www.cyclic.sh/
+
+I am documenting everything i learned, if any thing in the redme file does not make sense than don't bother i just wanted to document the problems and issues i encountered due to lack of my knowledge. 
+
+I required a basic knowledge on how a MERN project works
+
+Sorry if this is not professional, I am not trying to make it professinal.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======================================================================================================================================================================================
+# For me
 Fixes:
 1. check all dependencies and also force-versions
 2. check nodemon (global install) v3.1.0
@@ -20,4 +46,4 @@ Reset Git Configuration: If you suspect that Git configuration settings from Win
 this is because of linux's different line ending
 
 }
->>>>>>> master
+
