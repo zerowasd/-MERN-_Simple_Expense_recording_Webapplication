@@ -1,7 +1,16 @@
 # Expense_Management_System
-A Expense tracker web-app that uses MERN stack. I followed a Hindi youtube tutorial, i will link the playlist here: https://www.youtube.com/playlist?list=PLuHGmgpyHfRw1eJL5-2L0W1XsUVTTCEMh
+A Expense tracker web-app that uses MERN stack.
 
 I could not deploy the project as cyclic was shutdown: https://www.cyclic.sh/
+
+If you fork this you can run the it locally just make sure that you have Node version Manager, make sure the versions of all the tools are corresponding to the package json(or lock) file.
+Add the link to your mongodb database in .env file
+Commands to follow afterwords:
+   make sure you are using npm version 6.14.15 and node version 14.18.0
+   npm i
+   npm run dev
+   wait a while and it should open the local host environment
+
 
 I am documenting everything i learned, if any thing in the redme file does not make sense than don't bother i just wanted to document the problems and issues i encountered due to lack of my knowledge. 
 
@@ -26,6 +35,8 @@ Sorry if this is not professional, I am not trying to make it professinal.
 
 
 
+
+I followed a Hindi youtube tutorial, i will link the playlist here: https://www.youtube.com/playlist?list=PLuHGmgpyHfRw1eJL5-2L0W1XsUVTTCEMh
 
 =======================================================================================================================================================================================
 # For me
