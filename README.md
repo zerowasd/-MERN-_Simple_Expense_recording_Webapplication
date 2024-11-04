@@ -18,8 +18,6 @@ I am documenting everything i learned, if any thing in the redme file does not m
 
 I required a basic knowledge on how a MERN project works
 
-Sorry if this is not professional, I am not trying to make it professinal.
-
 
 
 
