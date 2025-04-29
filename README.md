@@ -6,7 +6,7 @@ I could not deploy the project as cyclic was shutdown: https://www.cyclic.sh/
 If you fork this you can run the it locally just make sure that you have Node version Manager, make sure the versions of all the tools are corresponding to the package json(or lock) file.
 
 
-Add the link to your mongodb database in .env file
+Add the link to your mongodb database with database name (that has one collection of 'user') in .env file
 Commands to follow afterwords:
    1. make sure you are using npm version 6.14.15 and node version 14.18.0
    2. npm i
