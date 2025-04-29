@@ -3,7 +3,7 @@ A Expense tracker web-app that uses MERN stack.
 
 I could not deploy the project as cyclic was shutdown: https://www.cyclic.sh/
 
-If you fork this you can run the it locally just make sure that you have Node version Manager, make sure the versions of all the tools are corresponding to the package json(or lock) file.
+If you fork this you can run the it locally just make sure that you have Node version Manager, make sure the versions of all the tools are corresponding to the package json(or lock) file. Even is there are critical errors worry not the project will work just fine, you can try to fix those errors
 
 
 Add the link to your mongodb database with database name (that has one collection of 'user') in .env file
