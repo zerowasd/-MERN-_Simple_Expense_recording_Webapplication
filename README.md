@@ -13,6 +13,8 @@ Commands to follow afterwords:
    3. npm run dev
    4. wait a while and it should open the local host environment
 
+   *IF NEW VERSION OF NODE DOES NOT WORK TRY ROLLING BACK TO NVM VERSION 1.1.12.
+
 
 I am documenting everything i learned, if any thing in the redme file does not make sense than don't bother i just wanted to document the problems and issues i encountered due to lack of my knowledge. 
 
